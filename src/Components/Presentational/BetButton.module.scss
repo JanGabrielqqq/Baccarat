@@ -1,0 +1,13 @@
+.BetButton {
+  width: 106px;
+  height: 40px;
+  border: 2px solid #b9a83c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s ease-in;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}

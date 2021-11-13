@@ -1,0 +1,14 @@
+.LowerButton {
+  width: 200px;
+  height: 40px;
+  background-color: #b9a83c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s ease-in;
+  color: #064320;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
