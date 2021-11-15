@@ -40,31 +40,28 @@ const Baccarat = createSlice({
         state.Cards[2],
         state.Cards[3]
       ).slice(4, state.Cards.length + 4);
-      console.log(state.Cards);
+      // console.log(state.Cards);
       state.BetValue = 0;
     },
 
     handleBetButton(state, action) {
-      console.log(`${typeof action.payload}`);
+      // console.log(`${typeof action.payload}`);
+      state.OpenBetModal = true;
+
       switch (action.payload) {
         case "0":
-          state.OpenBetModal = true;
           state.betLabel = "Player Pair";
           break;
         case "1":
-          state.OpenBetModal = true;
           state.betLabel = "Player";
           break;
         case "2":
-          state.OpenBetModal = true;
           state.betLabel = "Tie";
           break;
         case "3":
-          state.OpenBetModal = true;
           state.betLabel = "Banker";
           break;
         case "4":
-          state.OpenBetModal = true;
           state.betLabel = "Banker Pair";
           break;
 
@@ -83,7 +80,7 @@ const Baccarat = createSlice({
     addBet(state, action) {
       state.BetValue =
         state.BetValue + ChipsData[parseInt(action.payload)].value;
-      console.log(state.BetValue);
+      // console.log(state.BetValue);
     },
     finalizeBet(state, action) {
       state.OpenBetModal = false;
@@ -97,40 +94,30 @@ const Baccarat = createSlice({
       const bankerValueNumber = state.Cards[2].value + state.Cards[3].value;
       const playerValue = playerValueNumber.toString().slice(-1);
       const bankerValue = bankerValueNumber.toString().slice(-1);
-      console.log(`playerValue:${playerValue}, bankerValue:${bankerValue}`);
+      const historyData = {
+        playerCard1: state.Cards[0].name,
+        playerCard2: state.Cards[1].name,
+        playerValue,
+        bankerCard1: state.Cards[2].name,
+        bankerCard2: state.Cards[3].name,
+        bankerValue,
+        betLabel: state.betLabel,
+        betValue: state.BetValue,
+      };
+      // console.log(`playerValue:${playerValue}, bankerValue:${bankerValue}`);
       switch (state.betLabel) {
         case "Player":
           if (playerValue > bankerValue) {
             state.title = "YOU WON!";
             state.betMoney = state.betMoney + state.BetValue;
-            const historyData = {
-              playerCard1: state.Cards[0].name,
-              playerCard2: state.Cards[1].name,
-              playerValue,
-              bankerCard1: state.Cards[2].name,
-              bankerCard2: state.Cards[3].name,
-              bankerValue,
-              betLabel: state.betLabel,
-              betValue: state.BetValue,
-              balanceDiff: `+${state.BetValue}`,
-            };
 
+            historyData.balanceDiff = `+${state.BetValue}`;
             state.history = [...state.history, historyData];
           } else {
             state.title = "YOU LOSE!";
             state.betMoney = state.betMoney - state.BetValue;
-            const historyData = {
-              playerCard1: state.Cards[0].name,
-              playerCard2: state.Cards[1].name,
-              playerValue,
-              bankerCard1: state.Cards[2].name,
-              bankerCard2: state.Cards[3].name,
-              bankerValue,
-              betLabel: state.betLabel,
-              betValue: state.BetValue,
-              balanceDiff: `-${state.BetValue}`,
-            };
 
+            historyData.balanceDiff = `-${state.BetValue}`;
             state.history = [...state.history, historyData];
           }
           break;
@@ -140,34 +127,14 @@ const Baccarat = createSlice({
           ) {
             state.title = "YOU WON!";
             state.betMoney = state.betMoney + state.BetValue;
-            const historyData = {
-              playerCard1: state.Cards[0].name,
-              playerCard2: state.Cards[1].name,
-              playerValue,
-              bankerCard1: state.Cards[2].name,
-              bankerCard2: state.Cards[3].name,
-              bankerValue,
-              betLabel: state.betLabel,
-              betValue: state.BetValue,
-              balanceDiff: `+${state.BetValue}`,
-            };
 
+            historyData.balanceDiff = `+${state.BetValue}`;
             state.history = [...state.history, historyData];
           } else {
             state.title = "YOU LOSE!";
             state.betMoney = state.betMoney - state.BetValue;
-            const historyData = {
-              playerCard1: state.Cards[0].name,
-              playerCard2: state.Cards[1].name,
-              playerValue,
-              bankerCard1: state.Cards[2].name,
-              bankerCard2: state.Cards[3].name,
-              bankerValue,
-              betLabel: state.betLabel,
-              betValue: state.BetValue,
-              balanceDiff: `-${state.BetValue}`,
-            };
 
+            historyData.balanceDiff = `-${state.BetValue}`;
             state.history = [...state.history, historyData];
           }
           break;
@@ -175,34 +142,14 @@ const Baccarat = createSlice({
           if (playerValue === bankerValue) {
             state.title = "YOU WON!";
             state.betMoney = state.betMoney + state.BetValue;
-            const historyData = {
-              playerCard1: state.Cards[0].name,
-              playerCard2: state.Cards[1].name,
-              playerValue,
-              bankerCard1: state.Cards[2].name,
-              bankerCard2: state.Cards[3].name,
-              bankerValue,
-              betLabel: state.betLabel,
-              betValue: state.BetValue,
-              balanceDiff: `+${state.BetValue}`,
-            };
 
+            historyData.balanceDiff = `+${state.BetValue}`;
             state.history = [...state.history, historyData];
           } else {
             state.title = "YOU LOSE!";
             state.betMoney = state.betMoney - state.BetValue;
-            const historyData = {
-              playerCard1: state.Cards[0].name,
-              playerCard2: state.Cards[1].name,
-              playerValue,
-              bankerCard1: state.Cards[2].name,
-              bankerCard2: state.Cards[3].name,
-              bankerValue,
-              betLabel: state.betLabel,
-              betValue: state.BetValue,
-              balanceDiff: `-${state.BetValue}`,
-            };
 
+            historyData.balanceDiff = `-${state.BetValue}`;
             state.history = [...state.history, historyData];
           }
           break;
@@ -210,34 +157,14 @@ const Baccarat = createSlice({
           if (playerValue < bankerValue) {
             state.title = "YOU WON!";
             state.betMoney = state.betMoney + state.BetValue;
-            const historyData = {
-              playerCard1: state.Cards[0].name,
-              playerCard2: state.Cards[1].name,
-              playerValue,
-              bankerCard1: state.Cards[2].name,
-              bankerCard2: state.Cards[3].name,
-              bankerValue,
-              betLabel: state.betLabel,
-              betValue: state.BetValue,
-              balanceDiff: `+${state.BetValue}`,
-            };
 
+            historyData.balanceDiff = `+${state.BetValue}`;
             state.history = [...state.history, historyData];
           } else {
             state.title = "YOU LOSE!";
             state.betMoney = state.betMoney - state.BetValue;
-            const historyData = {
-              playerCard1: state.Cards[0].name,
-              playerCard2: state.Cards[1].name,
-              playerValue,
-              bankerCard1: state.Cards[2].name,
-              bankerCard2: state.Cards[3].name,
-              bankerValue,
-              betLabel: state.betLabel,
-              betValue: state.BetValue,
-              balanceDiff: `-${state.BetValue}`,
-            };
 
+            historyData.balanceDiff = `-${state.BetValue}`;
             state.history = [...state.history, historyData];
           }
           break;
@@ -247,34 +174,14 @@ const Baccarat = createSlice({
           ) {
             state.title = "YOU WON!";
             state.betMoney = state.betMoney + state.BetValue;
-            const historyData = {
-              playerCard1: state.Cards[0].name,
-              playerCard2: state.Cards[1].name,
-              playerValue,
-              bankerCard1: state.Cards[2].name,
-              bankerCard2: state.Cards[3].name,
-              bankerValue,
-              betLabel: state.betLabel,
-              betValue: state.BetValue,
-              balanceDiff: `+${state.BetValue}`,
-            };
 
+            historyData.balanceDiff = `+${state.BetValue}`;
             state.history = [...state.history, historyData];
           } else {
             state.title = "YOU LOSE!";
             state.betMoney = state.betMoney - state.BetValue;
-            const historyData = {
-              playerCard1: state.Cards[0].name,
-              playerCard2: state.Cards[1].name,
-              playerValue,
-              bankerCard1: state.Cards[2].name,
-              bankerCard2: state.Cards[3].name,
-              bankerValue,
-              betLabel: state.betLabel,
-              betValue: state.BetValue,
-              balanceDiff: `-${state.BetValue}`,
-            };
 
+            historyData.balanceDiff = `-${state.BetValue}`;
             state.history = [...state.history, historyData];
           }
           break;

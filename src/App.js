@@ -96,14 +96,19 @@ function App() {
                 key={i}
                 id={i}
                 onClick={handleBetButton}
+                testId={`bet-button-${i}`}
               />
             ))}
           </BetContainer>
         )}
         {/* map */}
-        <LowerButton label='Deal' onClick={handleDeal} />
+        <LowerButton label='Deal' onClick={handleDeal} testId='deal-button' />
         <LowerButton label='Shuffle' onClick={shuffle} />
-        <LowerButton label='Show History' onClick={showHistory} />
+        <LowerButton
+          label='Show History'
+          onClick={showHistory}
+          testId='history-button'
+        />
       </MainContainer>
     </>
   );

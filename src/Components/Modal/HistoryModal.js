@@ -3,8 +3,8 @@ import Backdrop from "./Backdrop";
 import classes from "./HistoryModal.module.scss";
 const HistoryModal = ({ onClose, history }) => {
   return (
-    <div className={classes.HistoryModalContainer}>
-      <Backdrop onClick={onClose} />
+    <div className={classes.HistoryModalContainer} data-testid='history-modal'>
+      <Backdrop onClick={onClose} testId='history-backdrop' />
       <div className={classes.HistoryModal}>
         <h1>History</h1>
         <div className={classes.HistoryModalTableHeader}>

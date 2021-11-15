@@ -22,6 +22,7 @@
 
     .HistoryModalTableHeader {
       display: grid;
+
       align-items: center;
       justify-content: center;
       grid-template-columns: repeat(6, 1fr);
@@ -32,11 +33,20 @@
       }
     }
     .HistoryModalTableBody {
+      height: 60vh;
+
       width: 100%;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       flex-direction: column;
+
+      overflow: hidden;
+      overflow-y: scroll;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
       .HistoryModalTableContent {
         width: 100%;
         display: grid;
